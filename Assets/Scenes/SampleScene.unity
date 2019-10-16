@@ -179,7 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebeb8d6fb3814904a916e939a4c0344c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coin: {fileID: 672584671579065258, guid: 3f0cf4eac8876e148aa4c9fb3fb87714, type: 3}
   _barriers:
   - {fileID: 4896801582115833836, guid: 5474890e7ea185b43990a9428f6cfbaf, type: 3}
   - {fileID: 52400585462039142, guid: a0c1336aca78eaf45b94706f59322339, type: 3}
@@ -188,6 +187,8 @@ MonoBehaviour:
   - {fileID: 1744184048}
   - {fileID: 1079598191}
   - {fileID: 732127841}
+  _coinTemplate: {fileID: 672584671579065258, guid: 3f0cf4eac8876e148aa4c9fb3fb87714,
+    type: 3}
   _pointsOfCoinSpawn:
   - {fileID: 1445018126}
   - {fileID: 428267914}
@@ -2244,6 +2245,7 @@ GameObject:
   - component: {fileID: 2129850881}
   - component: {fileID: 2129850885}
   - component: {fileID: 2129850886}
+  - component: {fileID: 2129850887}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2384,6 +2386,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathMenu: {fileID: 919950963}
+--- !u!114 &2129850887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129850880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f838141f6fbfe1e4ba8aa82e71d4f963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinCounter: {fileID: 74338333}
 --- !u!1 &2145140344
 GameObject:
   m_ObjectHideFlags: 0

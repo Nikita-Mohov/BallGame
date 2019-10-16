@@ -6,9 +6,10 @@ public class Coin : OncomingObjects
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        PlayerCoinPick playerCoinPick = collision.GetComponent<PlayerCoinPick>();
+        if(playerCoinPick != null)
         {
-            CoinCounter.AddCoin();
+            playerCoinPick.Pick();
             Destroy(gameObject);
         }
     }

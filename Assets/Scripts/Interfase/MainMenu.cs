@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public Animator Authors;
+    [SerializeField] private Animator Authors;
 
     public void Play()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void ShowAuthors()
+    public void InvertAuthorsOpenness()
     {
         bool state = Authors.GetBool("IsOpen");
         Authors.SetBool("IsOpen", !state);

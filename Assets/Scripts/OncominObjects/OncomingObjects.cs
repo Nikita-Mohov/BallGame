@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class OncomingObjects : MonoBehaviour
 {
+    [SerializeField] private float _speed;
+    [SerializeField] private float _destroyTime;
 
-    [SerializeField] protected float _speed;
-    [SerializeField] protected float _destroyTime;
     private void Start()
     {
         Invoke("Destroy", _destroyTime);

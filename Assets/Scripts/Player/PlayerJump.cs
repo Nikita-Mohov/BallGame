@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody2D;
-    private int _jumpAmount;
     [SerializeField] private int _allJumpAmount;
     [SerializeField] private float _jumpForce;
 
-    private bool _IsGround;
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private GameObject _groundChecker;
     [SerializeField] private float _checkRadius;
 
-    
+    private Rigidbody2D _rigidbody2D;
+    private int _jumpAmount;
+
+    private bool _IsGround;
+
     private void Start()
     {
         _jumpAmount = _allJumpAmount;

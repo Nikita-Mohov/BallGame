@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class CoinCounter : MonoBehaviour
 {
-    public static int _value = 0;
-    private static Text _counterText;
+    private int _value = 0;
+    private  Text _counterText;
 
     private void Start()
     {
@@ -14,13 +14,13 @@ public class CoinCounter : MonoBehaviour
         _counterText.text = "Coins: " + _value;
     }
 
-    public static void AddCoin()
+    public void AddCoin()
     {
         _value++;
         WriteValue();
     }
 
-    public static void WriteValue()
+    private void WriteValue()
     {
         _counterText.text = "Coins: " + _value;
     }
