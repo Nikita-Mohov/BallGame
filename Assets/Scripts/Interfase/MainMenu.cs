@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void InvertAuthorsOpenness()
+    public void ToggleAuthors()
     {
         bool state = Authors.GetBool("IsOpen");
         Authors.SetBool("IsOpen", !state);

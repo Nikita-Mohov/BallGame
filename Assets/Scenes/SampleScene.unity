@@ -160,6 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61333794}
   - component: {fileID: 61333793}
+  - component: {fileID: 61333795}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -187,12 +188,6 @@ MonoBehaviour:
   - {fileID: 1744184048}
   - {fileID: 1079598191}
   - {fileID: 732127841}
-  _coinTemplate: {fileID: 672584671579065258, guid: 3f0cf4eac8876e148aa4c9fb3fb87714,
-    type: 3}
-  _pointsOfCoinSpawn:
-  - {fileID: 1445018126}
-  - {fileID: 428267914}
-  - {fileID: 59074513}
   _timeBetweenSpawn: 1
 --- !u!4 &61333794
 Transform:
@@ -208,6 +203,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &61333795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61333792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e6a42b6c052ad4b9b8df76c3d8ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _barrierSpawner: {fileID: 61333793}
+  _coinTemplate: {fileID: 672584671579065258, guid: 3f0cf4eac8876e148aa4c9fb3fb87714,
+    type: 3}
+  _pointsOfCoinSpawn:
+  - {fileID: 1445018126}
+  - {fileID: 428267914}
+  - {fileID: 59074513}
 --- !u!1 &74338329
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a612a89d897e32043a597921ee1e9db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _counterText: {fileID: 74338330}
 --- !u!1 &226157441
 GameObject:
   m_ObjectHideFlags: 0

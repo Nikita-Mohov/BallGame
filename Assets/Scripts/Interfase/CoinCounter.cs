@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class CoinCounter : MonoBehaviour
 {
     private int _value = 0;
-    private  Text _counterText;
+    [SerializeField] private  Text _counterText;
 
     private void Start()
     {
-        _counterText = GetComponent<Text>();
         _counterText.text = "Coins: " + _value;
     }
 
