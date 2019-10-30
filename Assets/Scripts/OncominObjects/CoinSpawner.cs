@@ -2,61 +2,83 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinSpawner : MonoBehaviour
+public class CoinSpawner : Spawner
 {
     [SerializeField] private BarrierSpawner _barrierSpawner;
 
     [SerializeField] private GameObject _coinTemplate;
     [SerializeField] private GameObject[] _pointsOfCoinSpawn;
+    private Vector2 _spawnPoint;
 
-    private float _timeBetweenSpawn;
-    private float _timeToSpawn;
-
-    private bool _IsSpawned;
+    private new float _timeBetweenSpawn;
 
     void Start()
     {
-        _IsSpawned = false;
         _timeBetweenSpawn = _barrierSpawner.TimeBetweenSpawn - 0.2f;
         _timeToSpawn = _timeBetweenSpawn;
     }
 
     void Update()
     {
-        if (_timeToSpawn <= 0 && !_IsSpawned)
+        if (_timeToSpawn <= 0)
         {
-            _IsSpawned = true;
             _timeToSpawn = _timeBetweenSpawn;
-            StartCoroutine(SpawnCoin());
+            StartCoroutine(SpawnCheck());
         }
-        else if(!_IsSpawned)
+        else
+        {
             _timeToSpawn -= Time.deltaTime;
+        }
     }
 
-    private IEnumerator SpawnCoin()
+    private IEnumerator SpawnCheck()
     {
-        int coinspawnpoint;
-        int spawnCoins = Random.Range(0, 3);
+        int spawnCoins = Random.Range(1, 2);
         if (spawnCoins == 1)
         {
             if (_barrierSpawner.Spawnpoint == 2 || _barrierSpawner.Spawnpoint == 3)
-                coinspawnpoint = 0;
+                StartCoroutine(SpawnRaw());
             else
-                coinspawnpoint = 1;
-            Instantiate(_coinTemplate, _pointsOfCoinSpawn[coinspawnpoint].transform.position, _pointsOfCoinSpawn[coinspawnpoint].transform.rotation);
-            yield return new WaitForSeconds(0.2f);
-
-            if (coinspawnpoint == 1)
-                coinspawnpoint = 2;
-            Instantiate(_coinTemplate, _pointsOfCoinSpawn[coinspawnpoint].transform.position, _pointsOfCoinSpawn[coinspawnpoint].transform.rotation);
-            yield return new WaitForSeconds(0.2f);
-
-            if (coinspawnpoint == 2)
-                coinspawnpoint = 1;
-            Instantiate(_coinTemplate, _pointsOfCoinSpawn[coinspawnpoint].transform.position, _pointsOfCoinSpawn[coinspawnpoint].transform.rotation);
+                StartCoroutine(SpawnArc());
         }
         else
+        {
             yield return new WaitForSeconds(0.4f);
-        _IsSpawned = false;
+            _timeToSpawn = _timeBetweenSpawn;
+        }
+    }
+
+    private IEnumerator SpawnRaw()
+    {
+        _spawnPoint = _pointsOfCoinSpawn[0].transform.position;
+        for (int i = 0; i < 3; i++)
+        {
+            Instantiate(_coinTemplate, _spawnPoint, Quaternion.identity);
+            if(i != 2)
+            {
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        _timeToSpawn = _timeBetweenSpawn;
+    }
+
+    private IEnumerator SpawnArc()
+    {
+        _spawnPoint = _pointsOfCoinSpawn[1].transform.position;
+        for (int i = 0; i < 3; i++)
+        {
+            Instantiate(_coinTemplate, _spawnPoint, Quaternion.identity);
+            if (i == 0)
+            {
+                _spawnPoint.y += 1;
+                yield return new WaitForSeconds(0.2f);
+            }
+            else if (i == 1)
+            {
+                _spawnPoint.y -= 1;
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        _timeToSpawn = _timeBetweenSpawn;
     }
 }
