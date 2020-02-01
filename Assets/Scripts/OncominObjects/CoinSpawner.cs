@@ -2,83 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinSpawner : Spawner
+public class CoinSpawner : MonoBehaviour
 {
-    [SerializeField] private BarrierSpawner _barrierSpawner;
+    [SerializeField] private ObjectsSpawner _objectsSpawner;
+    [SerializeField] private CoinSpawnPoint _coinSpawnPoint;
 
-    [SerializeField] private GameObject _coinTemplate;
+    [SerializeField] private Coin _coinTemplate;
     [SerializeField] private GameObject[] _pointsOfCoinSpawn;
-    private Vector2 _spawnPoint;
 
-    private new float _timeBetweenSpawn;
+    private int _numberOfCoin;
+    private int _currentPoint = 0;
+    private float _speedOfSpawnPoint;
 
-    void Start()
+    [SerializeField] private int _coinsQuantity;
+    [SerializeField] private float _rowLength;
+    private float _distanceBetweenCoins;
+    public float DistanceBetweenCoins
     {
-        _timeBetweenSpawn = _barrierSpawner.TimeBetweenSpawn - 0.2f;
-        _timeToSpawn = _timeBetweenSpawn;
-    }
-
-    void Update()
-    {
-        if (_timeToSpawn <= 0)
+        get
         {
-            _timeToSpawn = _timeBetweenSpawn;
-            StartCoroutine(SpawnCheck());
-        }
-        else
-        {
-            _timeToSpawn -= Time.deltaTime;
+           return _distanceBetweenCoins;
         }
     }
 
-    private IEnumerator SpawnCheck()
+
+    private void Start()
     {
-        int spawnCoins = Random.Range(1, 2);
-        if (spawnCoins == 1)
+        _distanceBetweenCoins = _rowLength / _coinsQuantity;
+        _speedOfSpawnPoint = 2 * (_pointsOfCoinSpawn[1].transform.position.y - _pointsOfCoinSpawn[0].transform.position.y) / ( _distanceBetweenCoins / _coinTemplate.Speed * _coinsQuantity);
+        _coinSpawnPoint.GetSpeed(_speedOfSpawnPoint);
+    }
+
+    public void SpawnSelection()
+    {
+        if(Random.Range(0, 2) == 1)
         {
-            if (_barrierSpawner.Spawnpoint == 2 || _barrierSpawner.Spawnpoint == 3)
-                StartCoroutine(SpawnRaw());
+            _coinSpawnPoint.ArcToggle();
+        }
+        _numberOfCoin = 0;
+        SpawnCoin();
+    }
+
+    private void SpawnCoin()
+    {
+        Coin coin = Instantiate(_coinTemplate, _coinSpawnPoint.transform.position, Quaternion.identity);
+        _numberOfCoin++;
+        foreach (Coin c in GameObject.FindObjectsOfType<Coin>())
+        {
+            if(_numberOfCoin  == _coinsQuantity)
+            {
+                if(c == coin)
+                {
+                    c.OnArrival += _objectsSpawner.SpawnObject;
+                }
+            }
             else
-                StartCoroutine(SpawnArc());
-        }
-        else
-        {
-            yield return new WaitForSeconds(0.4f);
-            _timeToSpawn = _timeBetweenSpawn;
-        }
-    }
-
-    private IEnumerator SpawnRaw()
-    {
-        _spawnPoint = _pointsOfCoinSpawn[0].transform.position;
-        for (int i = 0; i < 3; i++)
-        {
-            Instantiate(_coinTemplate, _spawnPoint, Quaternion.identity);
-            if(i != 2)
             {
-                yield return new WaitForSeconds(0.2f);
+                c.OnMovedAway += SpawnCoin;
             }
         }
-        _timeToSpawn = _timeBetweenSpawn;
-    }
-
-    private IEnumerator SpawnArc()
-    {
-        _spawnPoint = _pointsOfCoinSpawn[1].transform.position;
-        for (int i = 0; i < 3; i++)
-        {
-            Instantiate(_coinTemplate, _spawnPoint, Quaternion.identity);
-            if (i == 0)
-            {
-                _spawnPoint.y += 1;
-                yield return new WaitForSeconds(0.2f);
-            }
-            else if (i == 1)
-            {
-                _spawnPoint.y -= 1;
-                yield return new WaitForSeconds(0.2f);
-            }
-        }
-        _timeToSpawn = _timeBetweenSpawn;
     }
 }
