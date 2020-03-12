@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseGame : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenu;
-    private bool _gameIsPaused = false;
+    private bool _isGamePaused = false;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (_gameIsPaused)
+            if (_isGamePaused)
                 Resume();
             else
                 Pause();
@@ -26,21 +26,21 @@ public class PauseMenu : MonoBehaviour
 
     protected void Pause()
     {
-        _gameIsPaused = true;
+        _isGamePaused = true;
         Time.timeScale = 0f;
         _pauseMenu.SetActive(true);
     }
 
     public void MainMenu()
     {
-        _gameIsPaused = false;
+        _isGamePaused = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
     public void Resume()
     {
-        _gameIsPaused = false;
+        _isGamePaused = false;
         Time.timeScale = 1f;
         _pauseMenu.SetActive(false);
     }

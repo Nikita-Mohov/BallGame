@@ -7,7 +7,7 @@ public class CoinCounter : MonoBehaviour
 {
     [SerializeField] private Text _counterText;
 
-    private int _value = 0;
+    private int _valueView = 0;
 
     private void Start()
     {
@@ -16,12 +16,12 @@ public class CoinCounter : MonoBehaviour
 
     public void AddCoin()
     {
-        _value++;
+        _valueView++;
         WriteValue();
     }
 
     private void WriteValue()
     {
-        _counterText.text = "Coins: " + _value;
+        _counterText.text = "Coins: " + _valueView;
     }
 }

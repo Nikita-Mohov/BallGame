@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OncomingObjects : MonoBehaviour
+public class LevelPart : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _destroyTime;
 
-    private GameObject _arrivalPoint;
-    protected CoinSpawnPoint _spawnPoint;
-    protected CoinSpawner _coinSpawner;
+    private Player _player;
 
     private bool _isArrival;
 
     public event UnityAction OnArrival;
+
     public float Speed
     {
         get
@@ -26,9 +25,7 @@ public class OncomingObjects : MonoBehaviour
     private void Start()
     {
         _isArrival = false;
-        _arrivalPoint = GameObject.FindGameObjectWithTag("ArrivalPoint");
-        _spawnPoint = GameObject.FindObjectOfType<CoinSpawnPoint>();
-        _coinSpawner = GameObject.FindObjectOfType<CoinSpawner>();
+        _player = GameObject.FindObjectOfType<Player>();
 
         Invoke("Destroy", _destroyTime);
     }
@@ -37,13 +34,10 @@ public class OncomingObjects : MonoBehaviour
     {
         transform.Translate(Vector2.left * _speed * Time.deltaTime);
 
-        if (_arrivalPoint.transform.position.x >= gameObject.transform.position.x && !_isArrival)
+        if (_player.transform.position.x >= gameObject.transform.position.x && !_isArrival)
         {
-            if(OnArrival != null)
-            {
-                OnArrival();
-                _isArrival = true;
-            }
+            OnArrival?.Invoke();
+            _isArrival = true;
         }
     }
 

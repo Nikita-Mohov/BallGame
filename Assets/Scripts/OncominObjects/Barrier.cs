@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier : OncomingObjects
+public class Barrier : MonoBehaviour
 {
     
 }
