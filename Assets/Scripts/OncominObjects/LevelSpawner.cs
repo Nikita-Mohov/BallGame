@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class LevelSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _levelParts;
+    [SerializeField] private LevelPart[] _levelParts;
     [SerializeField] private Transform _spawnPoint;
+
+    [SerializeField] private Player _player;
 
     private void Start()
     {
@@ -14,11 +16,11 @@ public class LevelSpawner : MonoBehaviour
 
     public void SpawnObject()
     {
-        Instantiate(_levelParts[Random.Range(0, _levelParts.Length)], _spawnPoint.position, Quaternion.identity);
-
+        LevelPart spawnedLevelPart = Instantiate(_levelParts[Random.Range(0, _levelParts.Length)], _spawnPoint.position, Quaternion.identity);
+        spawnedLevelPart.Init(_player);
         foreach (LevelPart lp in GameObject.FindObjectsOfType<LevelPart>())
         {
-            lp.OnArrival += SpawnObject;
+            lp.Arrived += SpawnObject;
         }
     }
 }

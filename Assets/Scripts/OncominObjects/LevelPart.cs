@@ -10,23 +10,12 @@ public class LevelPart : MonoBehaviour
 
     private Player _player;
 
-    private bool _isArrival;
+    private bool _isArrived = false;
 
-    public event UnityAction OnArrival;
-
-    public float Speed
-    {
-        get
-        {
-            return _speed;
-        }
-    }
+    public event UnityAction Arrived;
 
     private void Start()
     {
-        _isArrival = false;
-        _player = GameObject.FindObjectOfType<Player>();
-
         Invoke("Destroy", _destroyTime);
     }
 
@@ -34,15 +23,20 @@ public class LevelPart : MonoBehaviour
     {
         transform.Translate(Vector2.left * _speed * Time.deltaTime);
 
-        if (_player.transform.position.x >= gameObject.transform.position.x && !_isArrival)
+        if (_player.transform.position.x >= gameObject.transform.position.x && !_isArrived)
         {
-            OnArrival?.Invoke();
-            _isArrival = true;
+            Arrived?.Invoke();
+            _isArrived = true;
         }
     }
 
     private void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public void Init (Player player)
+    {
+        _player = player;
     }
 }

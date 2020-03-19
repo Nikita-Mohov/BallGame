@@ -150,8 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebeb8d6fb3814904a916e939a4c0344c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelParts: []
-  _spawnPoint: {fileID: 799436004}
 --- !u!4 &61333794
 Transform:
   m_ObjectHideFlags: 0
@@ -179,12 +177,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelParts:
-  - {fileID: 2387058897583246397, guid: 60821772d16edb7468b8e2a2a3906b35, type: 3}
-  - {fileID: 306914610340720912, guid: f703ea40e8943854da003fa303a42882, type: 3}
-  - {fileID: 1361777800060334566, guid: 1946443053270b94c8566518ece243fb, type: 3}
-  - {fileID: 459027656911383161, guid: f021f3202b6e76044b6f9b190306fca5, type: 3}
-  - {fileID: 7044170900878328120, guid: 32d382acb2e3ca746a310f8e60747984, type: 3}
+  - {fileID: 3976038940644372565, guid: 60821772d16edb7468b8e2a2a3906b35, type: 3}
+  - {fileID: 306914610340720918, guid: f703ea40e8943854da003fa303a42882, type: 3}
+  - {fileID: 3518963681271060107, guid: 1946443053270b94c8566518ece243fb, type: 3}
+  - {fileID: 1933991840634536135, guid: f021f3202b6e76044b6f9b190306fca5, type: 3}
+  - {fileID: 8975015014803553062, guid: 32d382acb2e3ca746a310f8e60747984, type: 3}
   _spawnPoint: {fileID: 799436004}
+  _player: {fileID: 2129850888}
 --- !u!1 &74338329
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a612a89d897e32043a597921ee1e9db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _counterText: {fileID: 74338330}
+  _valueView: {fileID: 74338330}
 --- !u!1 &226157441
 GameObject:
   m_ObjectHideFlags: 0

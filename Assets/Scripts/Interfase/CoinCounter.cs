@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class CoinCounter : MonoBehaviour
 {
-    [SerializeField] private Text _counterText;
+    [SerializeField] private Text _valueView;
 
-    private int _valueView = 0;
+    private int _value = 0;
 
     private void Start()
     {
@@ -16,12 +16,12 @@ public class CoinCounter : MonoBehaviour
 
     public void AddCoin()
     {
-        _valueView++;
+        _value++;
         WriteValue();
     }
 
     private void WriteValue()
     {
-        _counterText.text = "Coins: " + _valueView;
+        _valueView.text = "Coins: " + _value;
     }
 }

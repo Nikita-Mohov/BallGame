@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private Animator Authors;
+    [SerializeField] private Animator _authors;
 
     public void Play()
     {
@@ -14,8 +14,8 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleAuthors()
     {
-        bool state = Authors.GetBool("IsOpen");
-        Authors.SetBool("IsOpen", !state);
+        bool state = _authors.GetBool("IsOpen");
+        _authors.SetBool("IsOpen", !state);
     }
 
     public void Quit()
