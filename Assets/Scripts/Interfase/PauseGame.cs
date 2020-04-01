@@ -17,31 +17,23 @@ public class PauseGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (_isGamePaused)
-                Resume();
-            else
-                Pause();
+            PauseSwitch();
         }
     }
 
-    protected void Pause()
+    private void PauseSwitch()
     {
-        _isGamePaused = true;
-        Time.timeScale = 0f;
-        _pauseMenu.SetActive(true);
+        _isGamePaused = !_isGamePaused;
+        if (_isGamePaused)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
+        _pauseMenu.SetActive(_isGamePaused);
     }
 
-    public void MainMenu()
+    private void MainMenu()
     {
-        _isGamePaused = false;
-        Time.timeScale = 1f;
+        PauseSwitch();
         SceneManager.LoadScene(0);
-    }
-
-    public void Resume()
-    {
-        _isGamePaused = false;
-        Time.timeScale = 1f;
-        _pauseMenu.SetActive(false);
     }
 }

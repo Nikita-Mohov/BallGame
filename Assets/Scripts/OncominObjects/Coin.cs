@@ -7,9 +7,7 @@ public class Coin : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerCoinPick playerCoinPick = collision.GetComponent<PlayerCoinPick>();
-
-        if(playerCoinPick != null)
+        if(collision.TryGetComponent(out PlayerCoinPick playerCoinPick))
         {
             playerCoinPick.Pick();
             Destroy(gameObject);

@@ -6,7 +6,6 @@ public class LevelSpawner : MonoBehaviour
 {
     [SerializeField] private LevelPart[] _levelParts;
     [SerializeField] private Transform _spawnPoint;
-
     [SerializeField] private Player _player;
 
     private void Start()
@@ -14,13 +13,15 @@ public class LevelSpawner : MonoBehaviour
         SpawnObject();
     }
 
+    private LevelPart GiveMember()
+    {
+        return _levelParts[Random.Range(0, _levelParts.Length)];
+    }
+
     public void SpawnObject()
     {
-        LevelPart spawnedLevelPart = Instantiate(_levelParts[Random.Range(0, _levelParts.Length)], _spawnPoint.position, Quaternion.identity);
+        LevelPart spawnedLevelPart = Instantiate(GiveMember(), _spawnPoint.position, Quaternion.identity);
         spawnedLevelPart.Init(_player);
-        foreach (LevelPart lp in GameObject.FindObjectsOfType<LevelPart>())
-        {
-            lp.Arrived += SpawnObject;
-        }
+        spawnedLevelPart.Arrived += SpawnObject;
     }
 }

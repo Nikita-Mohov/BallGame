@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DeathMenu : PauseGame
 {
-    public void Restart()
+    private void Restart()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);

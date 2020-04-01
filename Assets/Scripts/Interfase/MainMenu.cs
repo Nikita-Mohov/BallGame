@@ -7,18 +7,19 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Animator _authors;
 
-    public void Play()
+    private void Play()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }
 
-    public void ToggleAuthors()
+    private void ToggleAuthors()
     {
         bool state = _authors.GetBool("IsOpen");
         _authors.SetBool("IsOpen", !state);
     }
 
-    public void Quit()
+    private void Quit()
     {
         Application.Quit();
     }
